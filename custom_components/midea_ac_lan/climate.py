@@ -124,7 +124,8 @@ class MideaClimate(MideaEntity, ClimateEntity):
             self._state = self._modes[mode]
         else:
             self._state = HVAC_MODE_OFF
-        self._target_temperature = self._dm.get_status("target_temperature")
+        #self._target_temperature = self._dm.get_status("target_temperature")
+        self._target_temperature = (self._dm.get_status("target_temperature") * 1.8) + 32
         #self._indoor_temperature = self._dm.get_status("indoor_temperature")
         self._indoor_temperature = (self._dm.get_status("indoor_temperature") * 1.8) + 32
         self._outdoor_temperature = self._dm.get_status("outdoor_temperature")
