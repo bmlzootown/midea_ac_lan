@@ -28,7 +28,7 @@ async def async_setup_entry(hass: HomeAssistant, config_entry):
         _LOGGER.error("For V3 devices, the key and the token is required.")
         return False
     dm = DeviceManager(device_id, host, port, token, key, protocol, model)
-    dm.set_temp_fahrenheit(hass.config.units.temperature_unit == TEMP_FAHRENHEIT)
+    dm.set_temp_fahrenheit(True)
     dm.open(start_thread=True)
     if DOMAIN not in hass.data:
         hass.data[DOMAIN] = {}
