@@ -164,6 +164,7 @@ class DeviceManager(threading.Thread):
             self._status.swing_horizontal = parser.swing_horizontal
             self._status.target_temperature = parser.target_temperature
             self._status.indoor_temperature = parser.indoor_temperature
+            _LOGGER.debug(f"[{parser.indoor_temperature}]")
             if parser.outdoor_temperature != 102.0:
                 self._status.outdoor_temperature = parser.outdoor_temperature
             else:
