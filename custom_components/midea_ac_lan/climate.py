@@ -108,7 +108,7 @@ async def async_setup_entry(hass, config_entry, async_add_entities):
 class MideaClimate(MideaEntity, ClimateEntity):
     def __init__(self, device_manager: DeviceManager):
         super().__init__(device_manager, "climate")
-        self._temp_units = TEMP_FAHRENHEIT if self._dm.get_status("temp_fahrenheit") else TEMP_CELSIUS
+        self._temp_units = TEMP_FAHRENHEIT
         self._modes = [HVAC_MODE_OFF, HVAC_MODE_AUTO, HVAC_MODE_COOL, HVAC_MODE_DRY, HVAC_MODE_HEAT, HVAC_MODE_FAN_ONLY]
         self._fan_speeds = {FAN_VERY_LOW: 10,
                             FAN_LOW: 30,
@@ -125,7 +125,8 @@ class MideaClimate(MideaEntity, ClimateEntity):
         else:
             self._state = HVAC_MODE_OFF
         self._target_temperature = self._dm.get_status("target_temperature")
-        self._indoor_temperature = self._dm.get_status("indoor_temperature")
+        #self._indoor_temperature = self._dm.get_status("indoor_temperature")
+        self._indoor_temperature = (self._dm.get_status("indoor_temperature") * 1.8) + 32
         self._outdoor_temperature = self._dm.get_status("outdoor_temperature")
         self._fan_speed_num = self._dm.get_status("fan_speed")
         if self._fan_speed_num > 100:
